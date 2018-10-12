@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
 
+import Countdown from './Countdown';
+
 const Container = styled('div')`
   text-align: center;
   height: 100vh;
@@ -21,11 +23,6 @@ const Question = styled('div')`
   display: block;
 `;
 
-const TimeLeft = styled('div')`
-  font-size: 1rem;
-  display: block;
-`;
-
 const Pyro = css`
   display: block;
   position: absolute;
@@ -34,6 +31,25 @@ const Pyro = css`
   top: 0;
   bottom: 0;
 }
+`;
+
+const Image = styled('img')`
+  width: 100vw;
+  position: absolute;
+  bottom: -25%;
+  left: 0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
+
+  @media (min-width: 768px) {
+    width: 50vw;
+  }
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 class Beer extends Component {
@@ -86,6 +102,12 @@ class Beer extends Component {
         <Answer>
           {this.state.beerTime ? <div>Yes {this.fireWorks()}</div> : 'No'}
         </Answer>
+        <Countdown />
+
+        <Image
+          src="/images/beer.png"
+          className={this.state.beerTime ? 'show' : ''}
+        />
       </Container>
     );
   }
