@@ -55,7 +55,8 @@ const Image = styled('img')`
 class Beer extends Component {
   state = {
     beerTime: false,
-    timeLeft: false
+    timeLeft: false,
+    iamgeLoaded: false
   };
 
   beerTime = {
@@ -98,7 +99,7 @@ class Beer extends Component {
   render() {
     return (
       <Container>
-        <Question>Is it beer O'Clock?</Question>
+        <Question>Is it beer o'clock?</Question>
         <Answer>
           {this.state.beerTime ? <div>Yes {this.fireWorks()}</div> : 'No'}
         </Answer>
@@ -106,7 +107,14 @@ class Beer extends Component {
 
         <Image
           src="/images/beer.png"
-          className={this.state.beerTime ? 'show' : ''}
+          onLoad={() => {
+            this.setState({
+              iamgeLoaded: true
+            });
+          }}
+          className={
+            this.state.beerTime && this.state.iamgeLoaded ? 'show' : ''
+          }
         />
       </Container>
     );
