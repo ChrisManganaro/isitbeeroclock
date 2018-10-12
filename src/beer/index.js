@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
 const Container = styled('div')`
   text-align: center;
@@ -26,12 +26,31 @@ const TimeLeft = styled('div')`
   display: block;
 `;
 
+const Pyro = css`
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+`;
+
 class Beer extends Component {
+  fireWorks = () => {
+    return (
+      <div className={`pyro ${Pyro}`}>
+        <div className="before" />
+        <div className="after" />
+      </div>
+    );
+  };
+
   isItTime = () => {
     const date = new Date();
 
     if (date.getDay() === 5 && date.getHours() >= 16) {
-      return 'Yes';
+      return <div>Yes {this.fireWorks()}</div>;
     }
     return 'No';
   };
